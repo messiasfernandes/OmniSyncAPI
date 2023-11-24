@@ -5,7 +5,6 @@ package com.omnisyncapi.erpapi.domain.entity;
 
 import com.omnisyncapi.erpapi.util.Normalizacao;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +28,7 @@ public class SubGrupo  extends GeradorId{
 	public void setNomeSubgrupo(String nomeSubgrupo) {
 		this.nomeSubgrupo = Normalizacao.normalizarNome(nomeSubgrupo);
 	}
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Grupo grupo;
 

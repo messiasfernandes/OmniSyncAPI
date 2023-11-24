@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,21 +22,23 @@ import com.omnisyncapi.erpapi.model.input.ClasseInput;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/classes")
-public class ClasseController implements ClasseOpenApi{
+public class ClasseController implements ClasseOpenApi {
 	@Autowired
-    private ClasseConverter classeConverter;
+	private ClasseConverter classeConverter;
 	@Autowired
 	private ServiceClasse serviceClasse;
+
 	@GetMapping
 	@Override
 	public ResponseEntity<Page<ClasseDTO>> listar(
 			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
 			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "size", defaultValue = "10") Integer size, Pageable page) {
-	
-		return ResponseEntity.status(HttpStatus.OK).body(classeConverter.topage( serviceClasse.buscar(parametro, page)));
+
+		return ResponseEntity.status(HttpStatus.OK).body(classeConverter.topage(serviceClasse.buscar(parametro, page)));
 	}
 
 	@Override
@@ -49,18 +52,22 @@ public class ClasseController implements ClasseOpenApi{
 		// TODO Auto-generated method stub
 		return null;
 	}
-   @PutMapping
+
+	@PutMapping("/{id}")
 	@Override
-	public ResponseEntity<ClasseDTO> Atualizar(Long id, ClasseInput classeInput, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<ClasseDTO> Atualizar(@PathVariable Long id, @Valid @RequestBody ClasseInput classeInput, HttpServletResponse response) {
+		classeInput.setId(id);
+		var classeSalva = serviceClasse.salvar(classeConverter.toEntity(classeInput));
+		return ResponseEntity.status(HttpStatus.OK).body(classeConverter.toDto(classeSalva));
 	}
-   @PostMapping
+
+	@PostMapping
 	@Override
 	public ResponseEntity<ClasseDTO> criar(@Valid @RequestBody ClasseInput classeInput, HttpServletResponse response) {
-	   System.out.println( "minha call0"+ classeInput.getNomeClasse());
-		var classeSalva= serviceClasse.salvar(classeConverter.toEntity(classeInput));
-		return ResponseEntity.status(HttpStatus.CREATED).body(classeConverter.toDto(classeSalva));
+		System.out.println("minha call0" + classeInput.getSubGrupo().getNomeSubgrupo());
+		   System.out.println("Conteúdo de classeInput: " + classeInput.toString());
+		 var classeSalva= serviceClasse.salvar(classeConverter.toEntity(classeInput));
+		return  ResponseEntity.status(HttpStatus.CREATED).body(classeConverter.toDto(classeSalva));
 	}
 
 }
