@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class GrupoInput {
 	private Long id;
-	private String nomeClasse;                                                                                                                                                                
+	private String nomeGrupo;                                                                                                                                                                
 
 		
 }

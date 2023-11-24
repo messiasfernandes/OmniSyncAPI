@@ -1,6 +1,5 @@
 package com.omnisyncapi.erpapi.domain.service;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,9 +45,9 @@ public class ServiceClasse implements ServiceModel<Classe> {
 		        objeto.getSubGrupo().setGrupo(grupo);
 		    }
 
-		    if (objeto.getSubGrupo() != null && objeto.getSubGrupo().getGrupo() != null && objeto.getSubGrupo().getGrupo().getId() == null) {
-		        var subGrupo = daoGrupo.save(objeto.getSubGrupo().getGrupo());
-		        objeto.getSubGrupo().setGrupo(subGrupo);
+		    if (objeto.getSubGrupo() != null && objeto.getSubGrupo() != null && objeto.getSubGrupo().getId() == null) {
+		        var subGrupo = daoSubGrupo.save(objeto.getSubGrupo());
+		        objeto.setSubGrupo(subGrupo);
 		    }
 
 		    return daoClasse.save(objeto);

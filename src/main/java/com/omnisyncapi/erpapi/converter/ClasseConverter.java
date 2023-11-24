@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.omnisyncapi.erpapi.domain.entity.Classe;
-import com.omnisyncapi.erpapi.model.ClasseDTO;
+import com.omnisyncapi.erpapi.model.dto.ClasseDTO;
 import com.omnisyncapi.erpapi.model.input.ClasseInput;
 
 @Component

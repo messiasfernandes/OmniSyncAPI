@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 
 import com.omnisyncapi.erpapi.domain.entity.Classe;
-import com.omnisyncapi.erpapi.model.ClasseDTO;
+import com.omnisyncapi.erpapi.model.dto.ClasseDTO;
 import com.omnisyncapi.erpapi.model.input.ClasseInput;
 
 import io.swagger.v3.oas.annotations.Operation;

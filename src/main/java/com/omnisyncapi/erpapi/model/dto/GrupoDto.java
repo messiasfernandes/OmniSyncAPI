@@ -1,4 +1,4 @@
-package com.omnisyncapi.erpapi.model;
+package com.omnisyncapi.erpapi.model.dto;
 
 import lombok.Data;
 
